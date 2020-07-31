@@ -1,0 +1,49 @@
+<mat-toolbar color="primary">
+  <div class="navbar">
+    <span>Weather App</span>
+  </div>
+</mat-toolbar>
+<section class="alert">
+  <div *ngIf="alert.activated">
+    <p>{{alert.text}}</p>
+  </div>
+</section>
+<main>
+  <mat-card>
+    <mat-card-header>
+      <svg class="logo">
+        <use href="../assets/images/icons.svg#cloud-icon" />
+      </svg>
+    </mat-card-header>
+    <mat-card-content>
+      <form (submit)="submitForm(inputCity, inputCountry)" class="weatherform">
+        <mat-form-field>
+          <input type="text" placeholder="City" matInput #inputCity>
+        </mat-form-field>
+        <mat-form-field>
+          <input type="text" placeholder="Country" matInput #inputCountry>
+        </mat-form-field>
+        <button mat-raised-button color="accent">Send</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+  <mat-card>
+    <mat-card-content>
+      <mat-list>
+        <mat-list-item> Temperature: <span *ngIf="weather" class="weatherdata"> {{ weather.main.temp }} ºC</span>
+        </mat-list-item>
+        <mat-list-item> Pressure: <span *ngIf="weather" class="weatherdata"> {{ weather.main.pressure }} hPa</span>
+        </mat-list-item>
+        <mat-list-item> Humidity: <span *ngIf="weather" class="weatherdata"> {{ weather.main.humidity }} %</span>
+        </mat-list-item>
+        <mat-list-item> Wind velocity: <span *ngIf="weather" class="weatherdata"> {{weather.wind.speed }} m/s</span>
+        </mat-list-item>
+        <mat-list-item> Description: <span *ngIf="weather" class="weatherdata"> {{ weather.weather[0].description }}
+          </span></mat-list-item>
+      </mat-list>
+    </mat-card-content>
+    <mat-card-header>
+      <mat-spinner *ngIf="spinner" diameter="30"></mat-spinner>
+    </mat-card-header>
+  </mat-card>
+</main>
